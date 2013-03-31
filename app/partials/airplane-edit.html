@@ -1,0 +1,60 @@
+
+Units
+<select ng-model="units">
+	<option value="metric">kg/mm</option>
+	<option value="imperial">lbs/inc</option>
+</select>
+<br>
+Template
+<select ng-model="template" ng-options="t.name for t in templates">
+</select>
+<br>
+Tail <input type="text" ng-model="airplane.tail"/>
+Name <input type="text" ng-model="airplane.name"/>
+
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="2">LOADING PROBLEM</th>
+			<th>weight ({{ getUnits(units).weight.unit }})</th>
+			<th>arm ({{ getUnits(units).arm.unit }})</th>
+			<th>moment ({{ getUnits(units).moment.unit }})</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="station in airplane.stations">
+			<td><button ng-click="removeStation($index)">X</button></td>
+			<td><input type="text" ng-model="station.name"/></td>
+			<td><input type="number" ng-model="station.weight" as-weight="{{units}}"/></td>
+			<td><input type="number" ng-model="station.arm" as-arm="{{units}}"/></td>
+			<td>{{ station.moment() | moment:units }}</td>
+		</tr>
+		<tr>
+			<td colspan="5"><button ng-click="addStation()">Add a station</button></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Ramp weight and moment</td>
+			<td>{{ airplane.ramp().weight | weight:units }}</td>
+			<td></td>
+			<td>{{ airplane.ramp().moment | moment:units }}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="text" ng-model="airplane.taxi.name"/></td>
+			<td><input type="number" ng-model="airplane.taxi.weight" as-weight="{{units}}"/></td>
+			<td><input type="number" ng-model="airplane.taxi.arm" as-arm="{{units}}"/></td>
+			<td>{{ airplane.taxi.moment() | moment:units }}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Takeoff weight and moment</td>
+			<td>{{ airplane.takeoff().weight | weight:units }}</td>
+			<td></td>
+			<td>{{ airplane.takeoff().moment | moment:units }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<button ng-click="save()">Save</button>

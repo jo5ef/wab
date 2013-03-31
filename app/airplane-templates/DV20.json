@@ -1,0 +1,10 @@
+{
+	"type": "DV20",
+	"stations": [
+		{ "name": "Basic Empty Weight", "weight": 1146, "arm": 11.236 },
+		{ "name": "Pilot and Passenger", "weight": 380, "arm": 5.630 },
+		{ "name": "Baggage", "weight": 0, "arm": 0},
+		{ "name": "Usable Fuel", "weight": 84, "arm": 33.15 }
+	],
+	"taxi": { "name": "Fuel allowance for engine runup and taxi", "weight": 0, "arm": 33.15 }
+}

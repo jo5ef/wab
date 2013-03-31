@@ -1,0 +1,14 @@
+[{
+	"name": "Cessna 152 (C152)",
+	"type": "C152",
+	"filename": "C152.json"
+ },{
+	"name": "Cessna 172 (C172)",
+	"type": "C172",
+	"filename": "C172.json"
+ },{
+	"name": "DV20 Katana",
+	"type": "DV20",
+	"filename": "DV20.json"
+ }
+]
