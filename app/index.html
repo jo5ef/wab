@@ -7,12 +7,13 @@
 	</head>
 	<body>
 		<div class="left col scroll-y">
-			<ul ng-controller="NavCtrl">
+			<div class="top-bar">&nbsp;</div>
+			<ul ng-controller="NavCtrl" class="box">
 				<li ng-repeat="airplane in airplanes">
-					<a href="#/edit/{{ airplane.id }}">{{ airplane.tail + ' ' + airplane.name }}</a>
+					<a href="#/airplane/{{ airplane.id }}">{{ airplane.tail + ' ' + airplane.name }}</a>
 				</li>
 				<li>
-					<a href="#/new">new airplane</a>
+					<a href="#/airplane/new">new airplane</a>
 				</li>
 			</ul>
 		</div>

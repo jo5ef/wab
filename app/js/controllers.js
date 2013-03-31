@@ -5,6 +5,27 @@ function NavCtrl($scope, storage) {
 	$scope.airplanes = storage.queryAirplanes();
 }
 
+function AirplaneDetailCtrl($scope, $routeParams, storage) {
+	$scope.units = 'metric';
+	
+	if($routeParams.id) {
+		$scope.airplane = storage.loadAirplane($routeParams.id);
+	} else {
+		$scope.airplane = new Airplane();
+	}
+	
+	var env = new EnvelopeCanvas($scope.airplane.envelope);
+	
+	$scope.$watch('airplane', function() {
+		var to = $scope.airplane.takeoff();
+		env.redraw(to.weight, to.moment);
+	}, true);
+	
+	$scope.getUnits = function(units) {
+		return UNITS[units];
+	};
+};
+
 function AirplaneEditCtrl($rootScope, $log, $scope, $routeParams, $location, airplaneTemplates, storage) {
 	
 	$scope.units = 'metric';
