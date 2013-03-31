@@ -44,7 +44,7 @@ angular.module('airscale.directives', [])
 				
 				attrs.$observe('asArm', function(v) {
 					units = UNITS[v];
-					elm.val(units.arm.format(ngModel.$modelValue));
+					elm.val(f(ngModel.$modelValue));
 				});
 			}
 		};
@@ -68,7 +68,7 @@ angular.module('airscale.directives', [])
 				
 				attrs.$observe('asMoment', function(v) {
 					units = UNITS[v];
-					elm.val(units.moment.format(ngModel.$modelValue));
+					elm.val(f(ngModel.$modelValue));
 				});
 			}
 		};
