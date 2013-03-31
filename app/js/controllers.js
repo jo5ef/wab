@@ -33,6 +33,14 @@ function AirplaneEditCtrl($rootScope, $scope, $routeParams, $location, airplaneT
 		$scope.airplane.stations.splice(index, 1);
 	};
 	
+	$scope.addPoint = function() {
+		$scope.airplane.envelope.push(new EnvelopePoint());
+	};
+	
+	$scope.removePoint = function(index) {
+		$scope.airplane.envelope.splice(index, 1);
+	};
+	
 	$scope.save = function() {
 		storage.storeAirplane($scope.airplane);
 		$location.path('edit/' + $scope.airplane.id);

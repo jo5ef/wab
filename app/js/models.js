@@ -3,6 +3,7 @@ function Airplane() {
 	this.tail = '';
 	this.name = '';
 	this.stations = [];
+	this.envelope = [];
 	
 	this.ramp = function() {
 		var w = 0, m = 0;
@@ -41,6 +42,11 @@ function Airplane() {
 			this.stations[i].save(storage, keyPrefix + '.stations.' + i);
 		}
 		this.taxi.save(storage, keyPrefix + '.taxi');
+		
+		storage[keyPrefix + '.envelope.length'] = this.envelope.length;
+		for(var i = 0; i < this.envelope.length; i++) {
+			this.envelope[i].save(storage, keyPrefix + '.envelope.' + i);
+		}
 	};
 };
 
@@ -57,6 +63,11 @@ Airplane.load = function(storage, keyPrefix) {
 	}
 	
 	airplane.taxi = Station.load(storage, keyPrefix + '.taxi');
+	
+	l = parseInt(storage[keyPrefix + '.envelope.length']);
+	for(var i = 0; i < l; i++) {
+		airplane.envelope.push(EnvelopePoint.load(storage, keyPrefix + '.envelope.' + i));
+	}
 		
 	return airplane;
 };
@@ -81,6 +92,22 @@ Station.load = function(storage, keyPrefix) {
 		storage[keyPrefix + '.name'],
 		parseFloat(storage[keyPrefix + '.weight']),
 		parseFloat(storage[keyPrefix + '.arm']));
+};
+
+function EnvelopePoint(weight, moment) {
+	this.weight = weight;
+	this.moment = moment;
+	
+	this.save = function(storage, keyPrefix) {
+		storage[keyPrefix + '.weight'] = this.weight;
+		storage[keyPrefix + '.moment'] = this.moment;
+	}
+};
+
+EnvelopePoint.load = function(storage, keyPrefix) {
+	return new EnvelopePoint(
+		parseFloat(storage[keyPrefix + '.weight']),
+		parseFloat(storage[keyPrefix + '.moment']));
 };
 
 var IDENTITY_FUNCTION = function(v) { return v; };

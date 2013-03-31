@@ -6,8 +6,7 @@
 		<link rel="stylesheet" href="css/app.css"/>
 	</head>
 	<body>
-		<h1>({{ units.current.weight.unit }}) ({{ units.current.name }})</h1>
-		<ul ng-controller="NavCtrl">
+		<ul class="nav" ng-controller="NavCtrl">
 			<li ng-repeat="airplane in airplanes">
 				<a href="#/edit/{{ airplane.id }}">{{ airplane.tail + ' ' + airplane.name }}</a>
 			</li>
@@ -15,7 +14,7 @@
 				<a href="#/new">new airplane</a>
 			</li>
 		</ul>
-		<div ng-view></div>
+		<div class="view" ng-view></div>
 		<script src="lib/angular/angular.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/services.js"></script>

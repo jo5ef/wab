@@ -1,17 +1,18 @@
 
-Units
-<select ng-model="units">
-	<option value="metric">kg/mm</option>
-	<option value="imperial">lbs/inc</option>
-</select>
-<br>
-Template
-<select ng-model="template" ng-options="t.name for t in templates">
-</select>
-<br>
-Tail <input type="text" ng-model="airplane.tail"/>
-Name <input type="text" ng-model="airplane.name"/>
-
+<div>
+	Units
+	<select ng-model="units">
+		<option value="metric">kg/mm</option>
+		<option value="imperial">lbs/inc</option>
+	</select>
+	<br>
+	Template
+	<select ng-model="template" ng-options="t.name for t in templates">
+	</select>
+	<br>
+	Tail <input type="text" ng-model="airplane.tail"/>
+	Name <input type="text" ng-model="airplane.name"/>
+</div>
 
 <table>
 	<thead>
@@ -53,6 +54,28 @@ Name <input type="text" ng-model="airplane.name"/>
 			<td>{{ airplane.takeoff().weight | weight:units }}</td>
 			<td></td>
 			<td>{{ airplane.takeoff().moment | moment:units }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<br/>
+
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>weight ({{ getUnits(units).weight.unit }})</th>
+			<th>moment ({{ getUnits(units).moment.unit }})</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="point in airplane.envelope">
+			<td><button ng-click="removePoint($index)">X</button></td>
+			<td><input type="number" ng-model="point.weight" as-weight="{{units}}"/></td>
+			<td><input type="number" ng-model="point.moment" as-moment="{{units}}"/></td>
+		</tr>
+		<tr>
+			<td colspan="3"><button ng-click="addPoint()">Add a point</button></td>
 		</tr>
 	</tbody>
 </table>
