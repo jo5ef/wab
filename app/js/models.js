@@ -144,7 +144,7 @@ var UNITS = {
 		moment: {
 			unit: 'kg.-mm./1000',
 			format: function(v) { return v * 25.4 / 2.20462; },
-			parse: function(v) { return v / 25.4 / 2.20462; }
+			parse: function(v) { return v / (25.4 / 2.20462); }
 		}
 	}
 };
