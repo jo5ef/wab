@@ -5,7 +5,7 @@ function NavCtrl($scope, storage) {
 	$scope.airplanes = storage.queryAirplanes();
 }
 
-function AirplaneEditCtrl($rootScope, $scope, $routeParams, $location, airplaneTemplates, storage) {
+function AirplaneEditCtrl($rootScope, $log, $scope, $routeParams, $location, airplaneTemplates, storage) {
 	
 	$scope.units = 'metric';
 		
@@ -14,6 +14,8 @@ function AirplaneEditCtrl($rootScope, $scope, $routeParams, $location, airplaneT
 	} else {
 		$scope.airplane = new Airplane();
 	}
+	
+	var env = new EnvelopeCanvas($scope.airplane.envelope);
 	
 	$scope.templates = airplaneTemplates.query();
 	
@@ -24,6 +26,11 @@ function AirplaneEditCtrl($rootScope, $scope, $routeParams, $location, airplaneT
 			});
 		}
 	});
+	
+	$scope.$watch('airplane', function() {
+		var to = $scope.airplane.takeoff();
+		env.redraw(to.weight, to.moment);
+	}, true);
 	
 	$scope.addStation = function() {
 		$scope.airplane.stations.push(new Station());
