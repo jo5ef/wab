@@ -19,7 +19,7 @@
 	<table class="box">
 		<thead>
 			<tr>
-				<th colspan="2">LOADING PROBLEM</th>
+				<th colspan="2"></th>
 				<th>weight ({{ getUnits(units).weight.unit }})</th>
 				<th>arm ({{ getUnits(units).arm.unit }})</th>
 				<th>moment ({{ getUnits(units).moment.unit }})</th>
@@ -29,30 +29,30 @@
 			<tr ng-repeat="station in airplane.stations">
 				<td></td>
 				<td>{{ station.name }}</td>
-				<td><input type="number" ng-model="station.weight" as-weight="{{units}}"/></td>
-				<td>{{ station.arm | arm:units }}</td>
-				<td>{{ station.moment() | moment:units }}</td>
+				<td class="weight"><input type="number" ng-model="station.weight" as-weight="{{units}}"/></td>
+				<td class="arm">{{ station.arm | arm:units }}</td>
+				<td class="moment">{{ station.moment() | moment:units }}</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>Ramp weight and moment</td>
-				<td>{{ airplane.ramp().weight | weight:units }}</td>
+				<td class="weight">{{ airplane.ramp().weight | weight:units }}</td>
 				<td></td>
-				<td>{{ airplane.ramp().moment | moment:units }}</td>
+				<td class="moment">{{ airplane.ramp().moment | moment:units }}</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>{{ airplane.taxi.name }}</td>
-				<td><input type="number" ng-model="airplane.taxi.weight" as-weight="{{units}}"/></td>
-				<td>{{ airplane.taxi.arm | arm:units }}</td>
-				<td>{{ airplane.taxi.moment() | moment:units }}</td>
+				<td class="weight"><input type="number" ng-model="airplane.taxi.weight" as-weight="{{units}}"/></td>
+				<td class="arm">{{ airplane.taxi.arm | arm:units }}</td>
+				<td class="moment">{{ airplane.taxi.moment() | moment:units }}</td>
 			</tr>
-			<tr>
+			<tr class="takeoff">
 				<td></td>
 				<td>Takeoff weight and moment</td>
-				<td>{{ airplane.takeoff().weight | weight:units }}</td>
+				<td class="weight">{{ airplane.takeoff().weight | weight:units }}</td>
 				<td></td>
-				<td>{{ airplane.takeoff().moment | moment:units }}</td>
+				<td class="moment">{{ airplane.takeoff().moment | moment:units }}</td>
 			</tr>
 		</tbody>
 	</table>

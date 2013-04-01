@@ -1,7 +1,7 @@
 body {
 	margin: 0;
 	font-family: 'Helvetica Neue', Arial, sans-serif;
-	background: rgb(237, 236, 233);
+	background: #eee;
 }
 
 .row, .col { overflow: hidden; position: absolute; }
@@ -33,10 +33,11 @@ body {
 }
 
 .box {
-	border-color: rgba(0, 0, 0, 0.0980392);
+	border-color: #bbb;
 	border-radius: 6px;
 	border-style: solid;
 	border-width: 1px;
+	background: #fff;
 }
 
 .airplane-detail {
@@ -45,8 +46,31 @@ body {
 
 .airplane-detail canvas {
 	float: right;
+	margin-bottom: 20px;
+	padding: 10px;
 }
 
 .airplane-detail table {
 	width: 100%;
+}
+
+.airplane-detail th {
+	text-align: center;
+}
+
+.airplane-detail td {
+	padding: 5px;
+}
+
+.airplane-detail tr.takeoff td.weight,
+.airplane-detail tr.takeoff td.moment {
+	border-top: 1px solid #000;
+}
+
+.airplane-detail tr.takeoff {
+	font-weight: bold;
+}
+
+.weight, .arm, .moment {
+	text-align: right;
 }
