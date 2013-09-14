@@ -10,48 +10,28 @@
 		<header class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">&#9992; Weight &amp; Balance</a>
+					<span class="navbar-brand">&#9992; Weight &amp; Balance</span>
 				</div>
 				<form class="navbar-form navbar-nav navbar-right">
-						<!-- 
-						<div class="radio">
-							<label>
-								<input type="radio" ng-model="units" value="metric" name="units"/>
-								kg/mm
-							</label>
-						</div>
-						<div class="radio">
-							<label>
-								<input type="radio" ng-model="units" value="imperial" name="units"/>
-								lbs/inc
-							</label>
-						</div>
-						-->
 						<select class="form-control" ng-model="units">
 							<option value="metric">kg/mm</option>
 							<option value="imperial">lbs/inc</option>
 						</select>
 				</form>
-				
-			</div>
-			
-		</header>
-		<!-- <div class="container">
-			<div class="left col scroll-y">
-				<div class="top-bar">&nbsp;</div>
-				<ul ng-controller="NavCtrl" class="box">
-					<li ng-repeat="airplane in airplanes">
-						<a href="#/airplane/{{ airplane.id }}">{{ airplane.tail + ' ' + airplane.name }}</a>
-					</li>
-					<li>
-						<a href="#/airplane/new">new airplane</a>
+				<ul class="navbar-nav nav">
+					<li><a class="navbar-link" href="#/airplane/new">New Airplane</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Airplanes <b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu" ng-controller="NavCtrl">
+							<li ng-repeat="airplane in airplanes">
+								<a role="menuitem" href="#/airplane/{{ airplane.id }}">{{ airplane.tail }}</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
-			<div class="right col scroll-y">
-				
-			</div>
-		</div>-->
+			
+		</header>
 		<br/><br/><br/><br/><br/>
 		<div class="container" ng-view></div>
 		
@@ -64,5 +44,8 @@
 		<script src="js/filters.js"></script>
 		<script src="js/directives.js"></script>
 		<script src="js/models.js"></script>
+		
+		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>

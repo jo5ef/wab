@@ -53,6 +53,10 @@ function Airplane() {
 Airplane.load = function(storage, keyPrefix) {
 	var airplane = new Airplane();
 	
+	if(!storage[keyPrefix + '.id']) {
+		return null;
+	}
+	
 	airplane.id = storage[keyPrefix + '.id'];
 	airplane.tail = storage[keyPrefix + '.tail'];
 	airplane.name = storage[keyPrefix + '.name'];

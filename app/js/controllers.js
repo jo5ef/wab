@@ -5,13 +5,16 @@ function NavCtrl($scope, storage) {
 	$scope.airplanes = storage.queryAirplanes();
 }
 
-function AirplaneDetailCtrl($scope, $routeParams, storage) {
-	$scope.units = 'metric';
+function AirplaneDetailCtrl($rootScope, $location, $scope, $routeParams, storage) {
+	$rootScope.units = 'metric';
 	
 	if($routeParams.id) {
 		$scope.airplane = storage.loadAirplane($routeParams.id);
-	} else {
-		$scope.airplane = new Airplane();
+	}
+	
+	if(!$scope.airplane) {
+		$location.path('/airplane/new');
+		return;
 	}
 	
 	var env = new EnvelopeCanvas($scope.airplane.envelope);
@@ -28,7 +31,7 @@ function AirplaneDetailCtrl($scope, $routeParams, storage) {
 
 function AirplaneEditCtrl($rootScope, $log, $scope, $routeParams, $location, airplaneTemplates, storage) {
 	
-	$scope.units = 'metric';
+	$rootScope.units = 'metric';
 		
 	if($routeParams.id) {
 		$scope.airplane = storage.loadAirplane($routeParams.id);
@@ -71,7 +74,7 @@ function AirplaneEditCtrl($rootScope, $log, $scope, $routeParams, $location, air
 	
 	$scope.save = function() {
 		storage.storeAirplane($scope.airplane);
-		$location.path('edit/' + $scope.airplane.id);
+		$location.path('/airplane/' + $scope.airplane.id);
 	};
 	
 	$scope.getUnits = function(units) {
