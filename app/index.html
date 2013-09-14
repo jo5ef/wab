@@ -1,25 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" ng-app="airscale">
 	<head>
-		<meta charset="utf-8">
-		<title>Airscale</title>
-		<link rel="stylesheet" href="css/app.css"/>
+		<title>&#9992; Weight &amp; Balance</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Bootstrap -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	</head>
 	<body>
-		<div class="left col scroll-y">
-			<div class="top-bar">&nbsp;</div>
-			<ul ng-controller="NavCtrl" class="box">
-				<li ng-repeat="airplane in airplanes">
-					<a href="#/airplane/{{ airplane.id }}">{{ airplane.tail + ' ' + airplane.name }}</a>
-				</li>
-				<li>
-					<a href="#/airplane/new">new airplane</a>
-				</li>
-			</ul>
-		</div>
-		<div class="right col scroll-y">
-			<div class="view" ng-view></div>
-		</div>
+		<header class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">&#9992; Weight &amp; Balance</a>
+				</div>
+				<form class="navbar-form navbar-nav navbar-right">
+						<!-- 
+						<div class="radio">
+							<label>
+								<input type="radio" ng-model="units" value="metric" name="units"/>
+								kg/mm
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" ng-model="units" value="imperial" name="units"/>
+								lbs/inc
+							</label>
+						</div>
+						-->
+						<select class="form-control" ng-model="units">
+							<option value="metric">kg/mm</option>
+							<option value="imperial">lbs/inc</option>
+						</select>
+				</form>
+				
+			</div>
+			
+		</header>
+		<!-- <div class="container">
+			<div class="left col scroll-y">
+				<div class="top-bar">&nbsp;</div>
+				<ul ng-controller="NavCtrl" class="box">
+					<li ng-repeat="airplane in airplanes">
+						<a href="#/airplane/{{ airplane.id }}">{{ airplane.tail + ' ' + airplane.name }}</a>
+					</li>
+					<li>
+						<a href="#/airplane/new">new airplane</a>
+					</li>
+				</ul>
+			</div>
+			<div class="right col scroll-y">
+				
+			</div>
+		</div>-->
+		<br/><br/><br/><br/><br/>
+		<div class="container" ng-view></div>
 		
 		<script src="js/envelope.js"></script>
 		<script src="lib/angular/angular.js"></script>

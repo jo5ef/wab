@@ -1,89 +1,113 @@
-
-<div>
-	Units
+<div class="form-group">
+	<label for="template">Template</label>
+	<select name="template" class="form-control" ng-model="template" ng-options="t.name for t in templates"></select>
+</div>
+<h2>airplane details</h2>
+<form class="form-inline">
+	
+	<div class="form-group">
+		<label for="tail">Tail</label>
+		<input type="text" class="form-control" name="tail" ng-model="airplane.tail"/>
+	</div>
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input type="text" class="form-control" name="name" ng-model="airplane.name"/>
+	</div>
+</form>
+<br/>
+	<!-- Units
 	<select ng-model="units">
 		<option value="metric">kg/mm</option>
 		<option value="imperial">lbs/inc</option>
 	</select>
 	<br>
-	Template
-	<select ng-model="template" ng-options="t.name for t in templates">
-	</select>
-	<br>
-	Tail <input type="text" ng-model="airplane.tail"/>
-	Name <input type="text" ng-model="airplane.name"/>
-</div>
-
-<table>
+	-->
+<h2>loading</h2>
+<table class="table table-bordered table-hover table-condensed">
 	<thead>
 		<tr>
-			<th colspan="2">LOADING PROBLEM</th>
-			<th>weight ({{ getUnits(units).weight.unit }})</th>
-			<th>arm ({{ getUnits(units).arm.unit }})</th>
-			<th>moment ({{ getUnits(units).moment.unit }})</th>
+			<th>load</th>
+			<th class="text-center">weight ({{ getUnits(units).weight.unit }})</th>
+			<th class="text-center">arm ({{ getUnits(units).arm.unit }})</th>
+			<th class="text-center">moment ({{ getUnits(units).moment.unit }})</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="station in airplane.stations">
-			<td><button ng-click="removeStation($index)">X</button></td>
-			<td><input type="text" ng-model="station.name"/></td>
-			<td><input type="number" ng-model="station.weight" as-weight="{{units}}"/></td>
-			<td><input type="number" ng-model="station.arm" as-arm="{{units}}"/></td>
+			<td><input type="text" class="form-control" ng-model="station.name"/></td>
+			<td><input type="number" class="form-control" ng-model="station.weight" as-weight="{{units}}"/></td>
+			<td><input type="number" class="form-control" ng-model="station.arm" as-arm="{{units}}"/></td>
 			<td>{{ station.moment() | moment:units }}</td>
+			<td class="text-center">
+				<button type="button" title="remove this station" class="btn btn-danger" ng-click="removeStation($index)">&#9003;</button>
+			</td>
 		</tr>
 		<tr>
-			<td colspan="5"><button ng-click="addStation()">Add a station</button></td>
+			<td colspan="5">
+				<button type="button" title="add a new station" class="btn btn-success" ng-click="addStation()">Add a station</button>
+			</td>
 		</tr>
 		<tr>
+			<td><b>Ramp weight and moment</b></td>
+			<td><b>{{ airplane.ramp().weight | weight:units }}</b></td>
 			<td></td>
-			<td>Ramp weight and moment</td>
-			<td>{{ airplane.ramp().weight | weight:units }}</td>
+			<td><b>{{ airplane.ramp().moment | moment:units }}</b></td>
 			<td></td>
-			<td>{{ airplane.ramp().moment | moment:units }}</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td><input type="text" ng-model="airplane.taxi.name"/></td>
-			<td><input type="number" ng-model="airplane.taxi.weight" as-weight="{{units}}"/></td>
-			<td><input type="number" ng-model="airplane.taxi.arm" as-arm="{{units}}"/></td>
+			<td><input type="text" class="form-control" ng-model="airplane.taxi.name"/></td>
+			<td><input type="number" class="form-control" ng-model="airplane.taxi.weight" as-weight="{{units}}"/></td>
+			<td><input type="number" class="form-control" ng-model="airplane.taxi.arm" as-arm="{{units}}"/></td>
 			<td>{{ airplane.taxi.moment() | moment:units }}</td>
+			<td></td>
 		</tr>
 		<tr>
+			<td><b>Takeoff weight and moment</b></td>
+			<td><b>{{ airplane.takeoff().weight | weight:units }}</b></td>
 			<td></td>
-			<td>Takeoff weight and moment</td>
-			<td>{{ airplane.takeoff().weight | weight:units }}</td>
+			<td><b>{{ airplane.takeoff().moment | moment:units }}</b></td>
 			<td></td>
-			<td>{{ airplane.takeoff().moment | moment:units }}</td>
 		</tr>
 	</tbody>
 </table>
+<br/>
+<h2>envelope</h2>
+<div class="row">
+	<div class="col-md-6">
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+					<th class="text-center">weight ({{ getUnits(units).weight.unit }})</th>
+					<th class="text-center">moment ({{ getUnits(units).moment.unit }})</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="point in airplane.envelope">
+					<td><input type="number" class="form-control" ng-model="point.weight" as-weight="{{units}}"/></td>
+					<td><input type="number" class="form-control" ng-model="point.moment" as-moment="{{units}}"/></td>
+					<td class="text-center">
+						<button type="button" title="remove envelope point" class="btn btn-danger" ng-click="removePoint($index)">&#9003;</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<button type="button" class="btn btn-success" ng-click="addPoint()">Add a point</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-6">
+		<canvas>
+			Please use a younger browser.
+		</canvas>
+	</div>
+</div>
 
 <br/>
 
-<table>
-	<thead>
-		<tr>
-			<th></th>
-			<th>weight ({{ getUnits(units).weight.unit }})</th>
-			<th>moment ({{ getUnits(units).moment.unit }})</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="point in airplane.envelope">
-			<td><button ng-click="removePoint($index)">X</button></td>
-			<td><input type="number" ng-model="point.weight" as-weight="{{units}}"/></td>
-			<td><input type="number" ng-model="point.moment" as-moment="{{units}}"/></td>
-		</tr>
-		<tr>
-			<td colspan="3"><button ng-click="addPoint()">Add a point</button></td>
-		</tr>
-	</tbody>
-</table>
-
+<button type="button" class="btn btn-lg btn-primary" ng-click="save()">save &amp; view</button>
 <br/>
 
-<canvas width="300" height="120">
-	Please use a younger browser.
-</canvas>
-
-<button ng-click="save()">Save</button>
