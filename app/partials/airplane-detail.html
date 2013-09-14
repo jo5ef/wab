@@ -31,7 +31,7 @@
 				<td>{{ station.name }}</td>
 				<td class="weight">
 					<input type="number" ng-model="station.weight" as-weight="{{units}}"/><br/>
-					<input type="range" ng-model="station.weight" as-weight="{{units}}" min="0" max="300"/>
+					<!--<input type="range" ng-model="station.weight" as-weight="{{units}}" min="0" max="300"/>-->
 				</td>
 				<td class="arm">{{ station.arm | arm:units }}</td>
 				<td class="moment">{{ station.moment() | moment:units }}</td>

@@ -18,9 +18,10 @@ angular.module('airscale.directives', [])
 				
 				ngModel.$formatters.push(f);
 				
+				/*
 				scope.$watch(attrs.ngModel, function(v) {
 					elm.val(f(ngModel.$modelValue));
-				});
+				});*/
 				
 				attrs.$observe('asWeight', function(v) {
 					units = UNITS[v];
