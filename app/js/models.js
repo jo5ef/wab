@@ -76,18 +76,23 @@ Airplane.load = function(storage, keyPrefix) {
 	return airplane;
 };
 
-function Station(name, weight, arm) {
+function Station(name, weight, arm, isFuel) {
 	this.name = name;
 	this.weight = weight;
 	this.arm = arm;
+	this.isFuel = isFuel;
 	this.moment = function() {
 		return this.weight * this.arm / 1000;
-	}
+	};
+	this.fuel = function() {
+		return this.weight / 6;
+	};
 	
 	this.save = function(storage, keyPrefix) {
 		storage[keyPrefix + '.name'] = this.name;
 		storage[keyPrefix + '.weight'] = this.weight;
 		storage[keyPrefix + '.arm'] = this.arm;
+		storage[keyPrefix + '.isFuel'] = this.isFuel;
 	};
 };
 
@@ -95,7 +100,8 @@ Station.load = function(storage, keyPrefix) {
 	return new Station(
 		storage[keyPrefix + '.name'],
 		parseFloat(storage[keyPrefix + '.weight']),
-		parseFloat(storage[keyPrefix + '.arm']));
+		parseFloat(storage[keyPrefix + '.arm']),
+		storage[keyPrefix + '.isFuel'] == 'true');
 };
 
 function EnvelopePoint(weight, moment) {
@@ -105,7 +111,7 @@ function EnvelopePoint(weight, moment) {
 	this.save = function(storage, keyPrefix) {
 		storage[keyPrefix + '.weight'] = this.weight;
 		storage[keyPrefix + '.moment'] = this.moment;
-	}
+	};
 };
 
 EnvelopePoint.load = function(storage, keyPrefix) {
@@ -132,6 +138,11 @@ var UNITS = {
 			unit: 'lb.-in./1000',
 			format: IDENTITY_FUNCTION,
 			parse: IDENTITY_FUNCTION
+		},
+		fuel: {
+			unit: 'gal',
+			format: IDENTITY_FUNCTION,
+			parse: IDENTITY_FUNCTION
 		}
 	},
 	metric: {
@@ -149,6 +160,11 @@ var UNITS = {
 			unit: 'kg.-mm./1000',
 			format: function(v) { return v * 25.4 / 2.20462; },
 			parse: function(v) { return v / (25.4 / 2.20462); }
+		},
+		fuel: {
+			unit: 'liter',
+			format: function(v) { return v * 3.78541; },
+			parse: function(v) { return v / 3.78541; }
 		}
 	}
 };

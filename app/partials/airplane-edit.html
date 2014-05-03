@@ -21,6 +21,7 @@
 	<thead>
 		<tr>
 			<th>load</th>
+			<th>fuel</th>
 			<th class="text-center">weight ({{ getUnits(units).weight.unit }})</th>
 			<th class="text-center">arm ({{ getUnits(units).arm.unit }})</th>
 			<th class="text-center">moment ({{ getUnits(units).moment.unit }})</th>
@@ -30,6 +31,7 @@
 	<tbody>
 		<tr ng-repeat="station in airplane.stations">
 			<td><input type="text" class="form-control" ng-model="station.name"/></td>
+			<td><input type="checkbox" class="form-control" ng-model="station.isFuel"/></td>
 			<td><input type="number" class="form-control" ng-model="station.weight" as-weight="{{units}}"/></td>
 			<td><input type="number" class="form-control" ng-model="station.arm" as-arm="{{units}}"/></td>
 			<td>{{ station.moment() | moment:units }}</td>
@@ -38,12 +40,13 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="5">
+			<td colspan="6">
 				<button type="button" title="add a new station" class="btn btn-success" ng-click="addStation()">Add a station</button>
 			</td>
 		</tr>
 		<tr>
 			<td><b>Ramp weight and moment</b></td>
+			<td></td>
 			<td><b>{{ airplane.ramp().weight | weight:units }}</b></td>
 			<td></td>
 			<td><b>{{ airplane.ramp().moment | moment:units }}</b></td>
@@ -51,6 +54,7 @@
 		</tr>
 		<tr>
 			<td><input type="text" class="form-control" ng-model="airplane.taxi.name"/></td>
+			<td><input type="checkbox" class="form-control" ng-model="airplane.taxi.isFuel"/></td>
 			<td><input type="number" class="form-control" ng-model="airplane.taxi.weight" as-weight="{{units}}"/></td>
 			<td><input type="number" class="form-control" ng-model="airplane.taxi.arm" as-arm="{{units}}"/></td>
 			<td>{{ airplane.taxi.moment() | moment:units }}</td>
@@ -58,6 +62,7 @@
 		</tr>
 		<tr>
 			<td><b>Takeoff weight and moment</b></td>
+			<td></td>
 			<td><b>{{ airplane.takeoff().weight | weight:units }}</b></td>
 			<td></td>
 			<td><b>{{ airplane.takeoff().moment | moment:units }}</b></td>

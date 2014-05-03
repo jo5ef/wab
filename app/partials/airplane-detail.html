@@ -26,10 +26,12 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="station in airplane.stations">
-					<td>{{ station.name }}</td>
+					<td>
+						{{ station.name }}
+						<span ng-if="station.isFuel">({{ station.fuel() | fuel:units }} {{ getUnits(units).fuel.unit }})</span>
+					</td>
 					<td class="weight form-inline text-right">
-						<input type="number" class="form-control" ng-model="station.weight" as-weight="{{units}}"/><br/>
-						<!--<input type="range" ng-model="station.weight" as-weight="{{units}}" min="0" max="300"/>-->
+						<input type="number" class="form-control text-right" ng-model="station.weight" as-weight="{{units}}"/><br/>
 					</td>
 					<td class="arm text-right">{{ station.arm | arm:units }}</td>
 					<td class="moment text-right">{{ station.moment() | moment:units }}</td>
@@ -43,7 +45,7 @@
 				<tr>
 					<td>{{ airplane.taxi.name }}</td>
 					<td class="weight form-inline text-right">
-						<input type="number" class="form-control" ng-model="airplane.taxi.weight" as-weight="{{units}}"/>
+						<input type="number" class="form-control text-right" ng-model="airplane.taxi.weight" as-weight="{{units}}"/>
 					</td>
 					<td class="arm text-right">{{ airplane.taxi.arm | arm:units }}</td>
 					<td class="moment text-right">{{ airplane.taxi.moment() | moment:units }}</td>

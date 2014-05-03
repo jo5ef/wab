@@ -17,4 +17,9 @@ angular.module('airscale.filters', [])
 		return function(v, units) {
 			return $filter('number')(UNITS[units].moment.format(v), 2);
 		};
+	})
+	.filter('fuel', function($filter) {
+		return function(v, units) {
+			return $filter('number')(UNITS[units].fuel.format(v), 2);
+		};
 	});
