@@ -43,7 +43,10 @@
 					<td class="moment text-right"><b>{{ airplane.ramp().moment | moment:units }}</b></td>
 				</tr>
 				<tr>
-					<td>{{ airplane.taxi.name }}</td>
+					<td>
+						{{ airplane.taxi.name }}
+						<span ng-if="airplane.taxi.isFuel">({{ airplane.taxi.fuel() | fuel:units }} {{ getUnits(units).fuel.unit }})</span>
+					</td>
 					<td class="weight form-inline text-right">
 						<input type="number" class="form-control text-right" ng-model="airplane.taxi.weight" as-weight="{{units}}"/>
 					</td>
